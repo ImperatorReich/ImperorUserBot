@@ -41,6 +41,13 @@ def randomer():
 # msgcid = msg.chat.id
 # vot tut
 
+@app.on_message(filters.command(['up','update'],prefixes='.')& filters.me)
+def update(_,msg):
+	rep = 'https://raw.githubusercontent.com/ImperatorReich/ImperorUserBot/main/main.py'
+	req = requests.get(rep, allow_redirects=True)
+	open('main.py', 'wb').write(req.content)
+	restarter()
+
 @app.on_message(filters.command(['h','help'],prefixes='.')& filters.me)
 def help(_,msg):
 	app.edit_message_text(msg.chat.id,msg.message_id,"Заглянь в избранное")
@@ -66,7 +73,7 @@ def s(_, msg):
 def waifu(_, msg):
 	# app.send_photo(msg.photo.file_id)
 	app.delete_messages(msg.chat.id,msg.message_id,revoke=True)
-	# 
+	#
 	try:
 		pmsgg = msg.text.split('.waifu ', maxsplit=1)[1]
 		text = pmsgg.split(" ", 1)
@@ -79,7 +86,7 @@ def waifu(_, msg):
 		app.send_photo(msg.chat.id,img['url'])
 	except Exception as e:
 		app.send_message(msg.chat.id,'**писать команду так .waifu тип**(__sfw,nsfw__) **категория**([Для sfw = __waifu ,neko ,shinobu ,megumin ,bully ,cuddle ,cry ,hug ,awoo ,kiss ,lick ,pat ,smug ,bonk ,yeet ,blush ,smile ,wave ,highfive ,handhold ,nom ,bite ,glomp ,slap ,kill ,kick ,happy ,wink ,poke ,dance ,cringe__]\n[Для nsfw=__waifu,neko,trap,blowjob__])')
-		
+
 	# print(img['url'])
 
 
@@ -149,13 +156,16 @@ def modificate(_, msg):
 	app.send_message(msg.chat.id,'Перезапуститесь .restart')
 
 @app.on_message(filters.command('version',prefixes='.')& filters.me)
-def words(_, msg):
-	app.edit_message_text(msg.chat.id,msg.message_id,'1.1')
+def version(_, msg):
+	app.edit_message_text(msg.chat.id,msg.message_id,'1.2')
+
+def restarter():
+	os.execv(sys.executable, [sys.executable] + sys.argv)
 
 @app.on_message(filters.command(['restart','res'],prefixes='.')& filters.me)
 def restart(_, msg):
 	app.delete_messages(msg.chat.id, msg.message_id, revoke=True)
-	os.execv(sys.executable, [sys.executable] + sys.argv)
+	restarter()
 	print('sss')
 
 @app.on_message(filters.command(['fp','flexprint'],prefixes='.')& filters.me)
