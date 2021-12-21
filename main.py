@@ -150,7 +150,7 @@ def modificate(_, msg):
 
 @app.on_message(filters.command('version',prefixes='.')& filters.me)
 def words(_, msg):
-	app.edit_message_text(msg.chat.id,msg.message_id,'1.0')
+	app.edit_message_text(msg.chat.id,msg.message_id,'1.1')
 
 @app.on_message(filters.command(['restart','res'],prefixes='.')& filters.me)
 def restart(_, msg):
