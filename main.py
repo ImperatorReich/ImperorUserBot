@@ -157,7 +157,7 @@ def modificate(_, msg):
 
 @app.on_message(filters.command('version',prefixes='.')& filters.me)
 def version(_, msg):
-	app.edit_message_text(msg.chat.id,msg.message_id,'1.2')
+	app.edit_message_text(msg.chat.id,msg.message_id,'1.22')
 
 def restarter():
 	os.execv(sys.executable, [sys.executable] + sys.argv)
